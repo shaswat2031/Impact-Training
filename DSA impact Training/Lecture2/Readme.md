@@ -314,6 +314,244 @@ s.draw(); // Output: Drawing Circle
 
 ---
 
+# Difference Between `do-while` and `while` Loops in Java
+
+Both `while` and `do-while` loops are used for iteration in Java, but they differ in how and when the loop condition is checked, and how many times the loop body is guaranteed to execute.
+
+## What is a `while` Loop?
+
+A `while` loop is an entry-controlled loop. This means the loop's condition is checked **before** the loop body executes. If the condition is `false` at the start, the loop body will **not execute at all**.
+
+**Syntax:**
+```java
+while (condition) {
+    // statements to execute
+}
+```
+
+**Flow Diagram:**
+```
+   +-------------------+
+   |   Check condition |
+   +--------+----------+
+            |
+         true
+            v
+   +-------------------+
+   |   Loop body       |
+   +--------+----------+
+            |
+            +----> (back to Check condition)
+            |
+         false
+            v
+        Exit loop
+```
+
+**Example 1:**
+```java
+int count = 1;
+while (count <= 5) {
+    System.out.println("Count is: " + count);
+    count++;
+}
+// Output:
+// Count is: 1
+// Count is: 2
+// Count is: 3
+// Count is: 4
+// Count is: 5
+```
+
+**Example 2 (condition false initially):**
+```java
+int n = 10;
+while (n < 5) {
+    System.out.println("This will not print");
+}
+// Output: (nothing)
+```
+
+---
+
+## What is a `do-while` Loop?
+
+A `do-while` loop is an exit-controlled loop. This means the loop body is executed **at least once**, and then the condition is checked. If the condition is `true`, the loop continues; otherwise, it stops.
+
+**Syntax:**
+```java
+do {
+    // statements to execute
+} while (condition);
+```
+
+**Flow Diagram:**
+```
+   +-------------------+
+   |   Loop body       |
+   +--------+----------+
+            |
+   +-------------------+
+   | Check condition   |
+   +--------+----------+
+            |
+         true
+            +----> (back to Loop body)
+            |
+         false
+            v
+        Exit loop
+```
+
+**Example 1:**
+```java
+int count = 1;
+do {
+    System.out.println("Count is: " + count);
+    count++;
+} while (count <= 5);
+// Output:
+// Count is: 1
+// Count is: 2
+// Count is: 3
+// Count is: 4
+// Count is: 5
+```
+
+**Example 2 (condition false initially):**
+```java
+int n = 10;
+do {
+    System.out.println("This will print once even though n < 5 is false");
+} while (n < 5);
+// Output:
+// This will print once even though n < 5 is false
+```
+
+---
+
+## What is a `for` Loop?
+
+A `for` loop is another entry-controlled loop in Java, commonly used when the number of iterations is known in advance. It combines initialization, condition-checking, and increment/decrement in a single line.
+
+**Syntax:**
+```java
+for (initialization; condition; increment/decrement) {
+    // statements to execute
+}
+```
+
+- **initialization**: Executed once at the beginning (e.g., `int i = 0`)
+- **condition**: Checked before each iteration; loop runs if true
+- **increment/decrement**: Executed after each iteration (e.g., `i++`)
+
+**Flow Diagram:**
+```
+   +----------------------+
+   |   Initialization     |
+   +----------+-----------+
+              |
+         +----v----+
+         | Condition|
+         +----+----+
+              |
+           true
+              v
+      +---------------+
+      |   Loop body   |
+      +-------+-------+
+              |
+      +-------v-------+
+      | Increment/    |
+      | Decrement     |
+      +-------+-------+
+              |
+         (back to Condition)
+              |
+           false
+              v
+           Exit loop
+```
+
+**Example 1: Print numbers 1 to 5**
+```java
+for (int i = 1; i <= 5; i++) {
+    System.out.println("i = " + i);
+}
+// Output:
+// i = 1
+// i = 2
+// i = 3
+// i = 4
+// i = 5
+```
+
+**Example 2: Print even numbers from 2 to 10**
+```java
+for (int i = 2; i <= 10; i += 2) {
+    System.out.println(i);
+}
+// Output:
+// 2
+// 4
+// 6
+// 8
+// 10
+```
+
+**Example 3: Looping through an array**
+```java
+int[] arr = {10, 20, 30, 40};
+for (int i = 0; i < arr.length; i++) {
+    System.out.println(arr[i]);
+}
+// Output:
+// 10
+// 20
+// 30
+// 40
+```
+
+---
+
+## Summary Table
+
+| Loop Type   | Condition Check | Minimum Executions | Use Case                                  |
+|-------------|-----------------|-------------------|--------------------------------------------|
+| while       | Before body     | 0                 | When iterations depend on a condition      |
+| do-while    | After body      | 1                 | When loop must run at least once           |
+| for         | Before body     | 0                 | When number of iterations is known         |
+
+---
+
+## Example: User Input Validation
+
+**Using `while`:**
+```java
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter a positive number: ");
+int num = sc.nextInt();
+while (num <= 0) {
+    System.out.print("Invalid! Enter a positive number: ");
+    num = sc.nextInt();
+}
+System.out.println("You entered: " + num);
+```
+
+**Using `do-while`:**
+```java
+Scanner sc = new Scanner(System.in);
+int num;
+do {
+    System.out.print("Enter a positive number: ");
+    num = sc.nextInt();
+} while (num <= 0);
+System.out.println("You entered: " + num);
+```
+*In the `do-while` version, the prompt is always shown at least once.*
+
+---
+
 # Summary Table
 
 | OOPS Concept   | Description | Example |
